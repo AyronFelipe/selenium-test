@@ -1,4 +1,4 @@
-const { Builder, By, Key } = require('selenium-webdriver');
+const { Builder, By, Key, until } = require('selenium-webdriver');
 require('dotenv').config();
 
 async function setCpf(driver, value){
@@ -15,13 +15,18 @@ async function setPassword(driver, value) {
 (async function loginTest() {
     let driver = await new Builder().forBrowser('firefox').build();
     try {
-        await driver.get('http://localhost:8000');
+        await driver.get(process.env.URL);
         await driver.findElement(By.className('btn btn-sm btn-success')).click();
         await setCpf(driver, process.env.CPF);
         await setPassword(driver, process.env.PASSWORD);
+        await driver.sleep(2500);
+        await driver.wait(until.elementTextIs(driver.findElement(By.className('page-title')), 'Página Inicial'), 1000);
+        console.log('SUCCESS!!')
     } catch (error) {
-        console.log(error);
+        console.log(`ERROR: ${error}`);
     } finally {
-        //driver.quit()
+        if (driver) {
+            await driver.quit()
+        }
     }
 })();
