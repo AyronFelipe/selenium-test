@@ -21,9 +21,12 @@
   },
   "homepage": "https://github.com/AyronFelipe/selenium-test#readme",
   "dependencies": {
+    "axios": "^0.19.2",
+    "form-data": "^3.0.0",
     "selenium-webdriver": "^4.0.0-alpha.5"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "faker": "^4.1.0"
   }
 }
